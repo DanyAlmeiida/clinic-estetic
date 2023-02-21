@@ -1,0 +1,42 @@
+// Bootstrap
+// ---------------------------------------------------
+@import "~bootstrap/scss/functions";
+@import "~admin-lte/build/scss/bootstrap-variables";
+
+// Custom Theme Color START
+$custom-color: #8e855b;
+$theme-colors: (
+  primary: $custom-color,
+);
+// Custom Theme Color END
+
+// Variables and Mixins
+// ---------------------------------------------------
+@import "~admin-lte/build/scss/variables";
+@import "~admin-lte/build/scss/variables-alt";
+@import "~admin-lte/build/scss/mixins";
+
+@import "~bootstrap/scss/bootstrap";
+
+@import "~admin-lte/build/scss/parts/core";
+@import "~admin-lte/build/scss/parts/components";
+@import "~admin-lte/build/scss/parts/extra-components";
+@import "~admin-lte/build/scss/parts/pages";
+@import "~admin-lte/build/scss/parts/plugins";
+@import "~admin-lte/build/scss/parts/miscellaneous";
+
+.form-control:focus {
+  border-color: $custom-color !important;
+}
+
+.callout-primary {
+  border-color: $custom-color !important;
+}
+
+.input-group-addon {
+  font-weight: 600;
+  font-size: 15px;
+  background: #e3e3e3;
+}
+
+@import "~admin-lte/build/scss/bootstrap-variables";

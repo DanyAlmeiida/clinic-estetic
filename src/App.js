@@ -1,23 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import Header from "./App/Header";
+import SideBar from "./App/SideBar";
+import Content from "./App/Content";
+import classes from "./App/custom/application.scss";
+import Swal from "sweetalert2";
+import "jquery/dist/jquery.min.js";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="wrapper">
+      <Header />
+      <SideBar />
+      <Content />
     </div>
   );
 }

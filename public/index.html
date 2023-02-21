@@ -5,10 +5,7 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
+    <meta name="description" content="Web site created using create-react-app" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -24,9 +21,35 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="%PUBLIC_URL%/css/all.min.css" />
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="%PUBLIC_URL%/css/ionicons.min.css" />
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="%PUBLIC_URL%/css/tempusdominus-bootstrap-4.min.css" />
+    <!-- iCheck -->
+    <link rel="stylesheet" href="%PUBLIC_URL%/css/icheck-bootstrap.min.css" />
+    <!-- SweetAlert 2 -->
+    <link rel="stylesheet" href="%PUBLIC_URL%/css/sa2-bootstrap-4.min.css" />
+    <!-- Toast -->
+    <link rel="stylesheet" href="%PUBLIC_URL%/css/toastr.min.css" />
+    <!-- JQVMap -->
+    <link rel="stylesheet" href=%PUBLIC_URL%/css/jqvmap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="%PUBLIC_URL%/css/adminlte.min.css" />
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="%PUBLIC_URL%/css/OverlayScrollbars.min.css" />
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="%PUBLIC_URL%/css/daterangepicker.css" />
+    <!-- summernote -->
+    <link rel="stylesheet" href="%PUBLIC_URL%/css/summernote-bs4.min.css" />
+    <!-- summernote -->
+    <link rel="stylesheet" href="%PUBLIC_URL%/css/icheck-bootstrap.min.css" />
+    <title>Patrícia Clinic & Estetic</title>
   </head>
-  <body>
+  <body class="hold-transition sidebar-mini layout-fixed">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--
@@ -39,5 +62,65 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <!-- jQuery -->
+    <script src="%PUBLIC_URL%/js/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="%PUBLIC_URL%/js/jquery-ui.min.js"></script>
+
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+      $.widget.bridge("uibutton", $.ui.button);
+    </script>
+    <!-- Bootstrap 4 -->
+    <script src="%PUBLIC_URL%/js/bootstrap.bundle.min.js"></script>
+    <!-- ChartJS -->
+    <script src="%PUBLIC_URL%/js/Chart.min.js"></script>
+    <!-- Sparkline -->
+    <script src="%PUBLIC_URL%/js/sparkline.js"></script>
+
+    <!-- daterangepicker -->
+    <script src="%PUBLIC_URL%/js/moment.min.js"></script>
+    <!-- jQuery input-mask  -->
+    <script src="%PUBLIC_URL%/js/jquery.inputmask.min.js"></script>
+    <script src="%PUBLIC_URL%/js/daterangepicker.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="%PUBLIC_URL%/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Summernote -->
+    <script src="%PUBLIC_URL%/js/summernote-bs4.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="%PUBLIC_URL%/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="%PUBLIC_URL%/js/adminlte.js"></script>
+    <!-- SweetAlert2 App -->
+    <script src="%PUBLIC_URL%/js/sweetalert2.min.js"></script>
+    <!-- Toast App -->
+    <script src="%PUBLIC_URL%/js/toastr.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        var Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+        });
+        $(".nav-item ").click(function () {
+          if ($(this).hasClass("menu-open")) {
+            $(this).removeClass("menu-open");
+            $(this).children().removeClass("active");
+          } else {
+            $(this).addClass("menu-open");
+            $(this).children().addClass("active");
+          }
+          $(".nav-item").children().removeClass("active").not(this);
+          $(this).children().addClass("active");
+        });
+        $("[data-mask]").inputmask();
+        $(".nav-tabs a").click(function () {
+          $(this).tab("show");
+        });
+      });
+    </script>
+    <div id="toastsContainerTopRight" class="toasts-top-right fixed"></div>
   </body>
 </html>
