@@ -1,18 +1,10 @@
-FROM debian:latest
+FROM node:16.17.1-alpine3.16 as build
+WORKDIR /usr/app
+COPY . /usr/app
+RUN npm ci
+RUN npm run build
 
-LABEL maintainer="dany"
-WORKDIR /usr/src/app
-RUN apt-get update
-RUN apt-get -y install autoconf automake libtool nasm make pkg-config git apt-utils
-RUN apt-get -y install  npm 
-# copy package.json and package-lock.json and install packages. we do this
-# separate from the application code to better use docker's caching
-# `npm install` will be cached on future builds if only the app code changed
-COPY package*.json ./
-COPY ./build ./ 
-# copy the app
-COPY . .
-
-# expose port 3000 and start the app
-EXPOSE 3000
-CMD ["npm", "run", "deploy"]
+FROM nginx:1.23.1-alpine
+EXPOSE 80
+COPY ./docker/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /usr/app/dist /usr/share/nginx/html
