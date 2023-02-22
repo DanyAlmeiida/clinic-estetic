@@ -228,16 +228,16 @@ const UserDetail = (props) => {
                                   <div className="form-group">
                                     <label htmlFor="fg-laterization">Laterização:</label>
                                     <div className="form-group " id="fg-laterization" style={{ padding: "0.375rem" }} onChange={handleIsLeftHanded}>
+                                      <div className="control-label icheck-primary d-inline ml-2">
+                                        <input type="radio" id="radioPrimary2" name="r1" value="true" />
+                                        <label className="radio-inline" htmlFor="radioPrimary2">
+                                          ESQ
+                                        </label>
+                                      </div>
                                       <div className="control-label icheck-primary d-inline">
                                         <input type="radio" id="radioPrimary1" name="r1" value="false" />
                                         <label className="radio-inline" htmlFor="radioPrimary1">
                                           DIR
-                                        </label>
-                                      </div>
-                                      <div className="control-label icheck-primary d-inline ml-2">
-                                        <input type="radio" id="radioPrimary2" name="r1" value="true" />
-                                        <label className="radio-inline" htmlFor="radioPrimary2">
-                                          EQ
                                         </label>
                                       </div>
                                     </div>
