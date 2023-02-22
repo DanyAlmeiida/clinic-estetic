@@ -19,6 +19,7 @@
     "react-scripts": "5.0.1",
     "reactstrap": "^9.1.5",
     "sass": "^1.58.1",
+    "serve": "^14.2.0",
     "sweetalert2": "^11.7.1",
     "web-vitals": "^2.1.4"
   },
