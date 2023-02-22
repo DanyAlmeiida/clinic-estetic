@@ -3,7 +3,8 @@ FROM debian:latest
 LABEL maintainer="dany"
 WORKDIR /usr/src/app
 RUN apt-get update
-RUN apt-get upgrade -y
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+RUN sudo apt-get install nodejs
 RUN apt-get -y install autoconf automake libtool nasm make pkg-config git apt-utils
 RUN apt-get -y install  npm 
 # copy package.json and package-lock.json and install packages. we do this
