@@ -15,4 +15,4 @@ COPY . .
 
 # expose port 3000 and start the app
 EXPOSE 3000
-RUN npm run deploy
+CMD ["npm", "run", "deploy"]
