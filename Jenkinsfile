@@ -24,4 +24,3 @@ pipeline {
         }
     }
 }
-The pipe
