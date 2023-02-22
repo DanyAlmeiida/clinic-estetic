@@ -64,9 +64,9 @@ const UserDetail = (props) => {
   };
   const saveClientData = () => {
     setLoading(true);
-    console.log(gynecologicalCond);
+    console.log(state.clinicalInformation);
     state.clinicalInformation = clinicalInformation;
-    state.clinicalInformation.gynecologicalConditions = gynecologicalCond;
+    state.clinicalInformation.gynecologicalConditions = gynecologicalCond ?? null;
     API.put("/clients/" + params.id, state)
       .then((res) => {
         toast.fire({ icon: "success", title: "Cliente atualizado com sucesso!" }).then(() => getData());

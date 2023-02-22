@@ -34,7 +34,7 @@ export default class UserRegistration extends Component {
     //Handle validations
     let clientDto = {
       Name: this.state.name,
-      BirthDate: moment(this.state.birthdate, "DD/MM/YYYY").format(),
+      BirthDate: this.state.birthdate,
       JobOccupation: this.state.occupation,
       Observations: this.state.obs,
     };
@@ -106,12 +106,15 @@ export default class UserRegistration extends Component {
                               <label>Data de Nascimento:</label>
                               <div className="input-group">
                                 <DatePicker
-                                  type="text"
+                                  placeholderText="dd/mm/yyyy"
                                   id="birthdate"
-                                  value={moment(this.state?.birthdate ?? new Date()).format("DD/MM/YYYY")}
+                                  value={moment(this.state.birthdate ?? new Date()).format("DD/MM/YYYY")}
                                   dateFormat="dd/MM/yyyy"
                                   className="form-control"
-                                  onChange={(date) => this.setState({ birthdate: moment(date).format() })}
+                                  onChange={(date) => {
+                                    console.log(moment(date).format());
+                                    this.setState((prev) => ({ ...prev, birthdate: moment(date).format() }));
+                                  }}
                                 />
                               </div>
                             </div>
