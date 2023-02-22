@@ -10,7 +10,6 @@ RUN apt-get -y install  npm
 # `npm install` will be cached on future builds if only the app code changed
 COPY package*.json ./
 RUN npm install
-RUN npm run build
 # copy the app
 COPY . .
 
