@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'node'
-            args '-p 3100:3100 -v $(which docker):/usr/bin/docker'
+            args '-p 3100:3100 -v $(which docker):/usr/bin/docker '
         }
     }
     environment { 
