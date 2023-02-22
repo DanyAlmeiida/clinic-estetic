@@ -27,7 +27,7 @@ pipeline {
                         sudo docker rm react-ce
                     fi
                 '''
-                echo 'Build dockerfile..."
+                echo 'Build dockerfile...'
                 sh 'sudo docker buildx build . -f Dockerfile --tag react-ce'
                 echo 'starting docker container react-ce'
                 sh 'sudo docker run --name react-ce -d --publish 3000:3000 react-ce'
