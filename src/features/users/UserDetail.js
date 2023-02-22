@@ -188,18 +188,12 @@ const UserDetail = (props) => {
                               <div className="form-group">
                                 <label>Data de Nascimento:</label>
                                 <div className="input-group">
-                                  <input
-                                    style={{ width: "100%" }}
-                                    type="text"
-                                    id="birthdate"
+                                  <DatePicker
+                                    dateFormat="dd/MM/yyyy"
                                     className="form-control"
-                                    data-inputmask-alias="datetime"
-                                    placeholder="dd/mm/yyyy"
-                                    data-inputmask-inputformat="dd/mm/yyyy"
+                                    placeholderText="dd/mm/yyyy"
                                     value={moment(state?.birthDate).format("DD/MM/YYYY")}
-                                    data-mask=""
-                                    inputMode="numeric"
-                                    onChange={(e) => setState((prev) => ({ ...prev, birthdate: e.target.value }))}
+                                    onChange={(date) => setState((prev) => ({ ...prev, birthdate: moment(date).format() }))}
                                   />
                                 </div>
                               </div>
