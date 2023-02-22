@@ -17,6 +17,7 @@ export default class UserRegistration extends Component {
       obs: "",
     };
     document.title = this.props.title;
+    registerLocale("pt", pt);
   }
   today = () => "Penalva do Castelo, " + new Date().getDate() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getFullYear();
   handleSubmit = (e) => {
