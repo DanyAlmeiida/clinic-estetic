@@ -21,7 +21,7 @@ pipeline {
                 echo 'Deploying....'
                 sh ''' 
                     echo "checking for container react-ce installation and status"
-                    sudo if [ $( docker ps -a | grep react-ce | wc -l ) -gt 0 ]; 
+                    if [ $( sudo docker ps -a | grep react-ce | wc -l ) -gt 0 ] 
                     then   
                         sudo docker stop react-ce
                         sudo docker rm react-ce
