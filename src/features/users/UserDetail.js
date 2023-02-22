@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useRef, useEffect, useState } from "react";
 import API from "../../API";
 import moment from "moment";
 import Swal from "sweetalert2";
@@ -15,7 +15,6 @@ var toast = Swal.mixin({
 });
 const UserDetail = (props) => {
   registerLocale("pt", pt);
-
   const loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>;
   const params = useParams();
   const [showGynecologicalCond, setshowGynecologicalCond] = useState(false);
@@ -191,8 +190,7 @@ const UserDetail = (props) => {
                                   <DatePicker
                                     dateFormat="dd/MM/yyyy"
                                     className="form-control"
-                                    placeholderText="dd/mm/yyyy"
-                                    value={moment(state?.birthDate).format("DD/MM/YYYY")}
+                                    value={state?.birthDate != null ? moment(state?.birthDate).format("DD/MM/YYYY") : new Date()}
                                     onChange={(date) => setState((prev) => ({ ...prev, birthdate: moment(date).format() }))}
                                   />
                                 </div>

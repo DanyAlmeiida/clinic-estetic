@@ -13,12 +13,13 @@ export default class UserRegistration extends Component {
     this.state = {
       name: "",
       occupation: "",
-      birthdate: "",
+      birthdate: null,
       obs: "",
     };
     document.title = this.props.title;
     registerLocale("pt", pt);
   }
+
   today = () => "Penalva do Castelo, " + new Date().getDate() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getFullYear();
   handleSubmit = (e) => {
     var toast = Swal.mixin({
@@ -105,11 +106,11 @@ export default class UserRegistration extends Component {
                               <label>Data de Nascimento:</label>
                               <div className="input-group">
                                 <DatePicker
+                                  type="text"
                                   id="birthdate"
-                                  value={moment(this.state.birthdate).format("DD/MM/YYYY")}
+                                  value={moment(this.state?.birthdate ?? new Date()).format("DD/MM/YYYY")}
                                   dateFormat="dd/MM/yyyy"
                                   className="form-control"
-                                  placeholderText="dd/mm/yyyy"
                                   onChange={(date) => this.setState({ birthdate: moment(date).format() })}
                                 />
                               </div>
