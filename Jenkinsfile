@@ -4,7 +4,7 @@ pipeline {
         nodejs '19.7.0'
     }
     environment { 
-        CI = 'true'
+        CI = 'false'
     }
      stages {
         stage('Build') {
