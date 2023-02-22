@@ -65,7 +65,7 @@ const UserDetail = (props) => {
   };
   const saveClientData = () => {
     setLoading(true);
-    if(state.clinicalInformation != null)
+    if(clinicalInformation != null)
     {
       state.clinicalInformation = clinicalInformation;
       state.clinicalInformation.gynecologicalConditions = gynecologicalCond ?? null; 
