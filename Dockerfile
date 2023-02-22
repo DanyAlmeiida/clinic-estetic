@@ -1,8 +1,13 @@
-FROM node:16.17.1-alpine3.16 as build
-WORKDIR /usr/app
-COPY . /usr/app
+FROM debian:latest
 
-FROM nginx:1.23.1-alpine
+LABEL maintainer="dany"
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+COPY ./build ./ 
+# copy the app
+COPY . .
+
+# expose port 3000 and start the app
 EXPOSE 3000
-COPY ./default.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /usr/app/dist /usr/share/nginx/html
+CMD ["npm", "run", "deploy"]
