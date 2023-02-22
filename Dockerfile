@@ -1,7 +1,11 @@
-# use the latest node LTS release
-FROM node:gallium
-WORKDIR /usr/src/app
+FROM debian:latest
 
+LABEL maintainer="dany"
+WORKDIR /usr/src/app
+RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get -y install autoconf automake libtool nasm make pkg-config git apt-utils
+RUN apt-get -y install nodejs npm
 # copy package.json and package-lock.json and install packages. we do this
 # separate from the application code to better use docker's caching
 # `npm install` will be cached on future builds if only the app code changed
@@ -13,4 +17,3 @@ COPY . .
 
 # expose port 3000 and start the app
 EXPOSE 3000
-CMD [ "npm", "start" ]
