@@ -24,7 +24,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                sh 'docker run -d -p 9000:9000 node'
+                sh 'docker stop react-ce'
+                sh 'docker rm react-ce'
+                sh 'docker buildx build . -f Dockerfile --tag react-ce'
+                sh 'docker run -d --publish 3000:3000 react-ce'
             }
         }
     }
