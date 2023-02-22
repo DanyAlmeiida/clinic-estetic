@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import API from "../../API";
 import moment from "moment";
 import Swal from "sweetalert2";
+import DatePicker from "react-datepicker";
+import { registerLocale, setDefaultLocale } from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import pt from "date-fns/locale/pt";
+
 export default class UserRegistration extends Component {
   constructor(props) {
     super(props);
@@ -98,21 +103,7 @@ export default class UserRegistration extends Component {
                             <div className="form-group">
                               <label>Data de Nascimento:</label>
                               <div className="input-group">
-                                <input
-                                  style={{ width: "100%" }}
-                                  type="text"
-                                  id="birthdate"
-                                  className="form-control"
-                                  data-inputmask-alias="datetime"
-                                  placeholder="dd/mm/yyyy"
-                                  data-inputmask-inputformat="dd/mm/yyyy"
-                                  data-mask=""
-                                  inputMode="numeric"
-                                  onChange={(e) => {
-                                    console.log("teste");
-                                    this.setState({ birthdate: e.target.value });
-                                  }}
-                                />
+                                <DatePicker id="birthdate" dateFormat="dd/MM/yyyy" className="form-control" placeholderText="dd/mm/yyyy" onChange={(date) => this.setState({ birthdate: moment(date).format() })} />
                               </div>
                             </div>
                           </div>
