@@ -22,6 +22,7 @@ const UserDetail = (props) => {
   const [Loading, setLoading] = useState(false);
   const [clinicalInformation, setClinicalInformation] = useState(null);
   const [gynecologicalCond, setGynecologicalCond] = useState(null);
+  
   const [state, setState] = useState({
     clientId: 0,
     name: "",
