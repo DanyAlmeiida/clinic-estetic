@@ -25,7 +25,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                sh 'docker build -t react-clinic-estetic -v $(which docker):/usr/bin/docker'
+                sh 'docker build'
             }
         }
     }
