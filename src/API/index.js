@@ -1,7 +1,7 @@
 import axios from "axios";
 export default axios.create(
   {
-    baseURL: "http://38.242.150.115:8200/api/",
+    baseURL: process.env.CE_REACT_API_ENDPOINT,
     responseType: "json",
     headers: {
       Accept: "application/json, text/plain, */*",
