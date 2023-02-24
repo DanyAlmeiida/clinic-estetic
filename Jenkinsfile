@@ -10,7 +10,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building...'
-                configFileProvider([configFile(fileId: "945663d9-c945-47db-a996-5d9ee6ce3401.env", targetLocation: 'env.groovy', variable: 'ENV_CONFIG')]) {
+                configFileProvider([configFile(fileId: "945663d9-c945-47db-a996-5d9ee6ce3401", targetLocation: 'env.groovy', variable: 'ENV_CONFIG')]) {
                     load "env.groovy";
                 }
                 sh "cat ${env.ENV_CONFIG}"
