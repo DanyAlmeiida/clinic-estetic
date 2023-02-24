@@ -13,7 +13,6 @@ pipeline {
                 configFileProvider([configFile(fileId: "945663d9-c945-47db-a996-5d9ee6ce3401", targetLocation: 'env.groovy', variable: 'ENV_CONFIG')]) {
                     load "env.groovy";
                 }
-                sh 'env | sort'
                 sh 'npm install'
                 sh 'npm run build'
             }
