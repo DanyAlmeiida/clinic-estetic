@@ -11,7 +11,7 @@ pipeline {
             steps {
                 echo 'Building...'
                 configFileProvider([configFile(fileId: "2cba4e18-1c87-4884-b354-66ad73c5d3a1", targetLocation: '.env', variable: 'ENV_CONFIG')]) {
-                    load "env.groovy";
+                    load ".env";
                     sh 'npm install'
                     sh 'npm run build'
                 }
