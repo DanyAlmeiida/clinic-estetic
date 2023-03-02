@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        nodejs '19.7.0'
+        nodejs 'nodejs'
     }
     environment { 
         CI = 'false'
