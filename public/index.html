@@ -104,6 +104,12 @@
           showConfirmButton: false,
           timer: 3000,
         });
+        var ToastConfirmation = Swal.mixin({
+          showDenyButton: true,
+          showCancelButton: true,
+          confirmButtonText: "Confirmar",
+          denyButtonText: `Cancelar`,
+        });
         $(".nav-item ").click(function () {
           if ($(this).hasClass("menu-open")) {
             $(this).removeClass("menu-open");

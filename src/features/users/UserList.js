@@ -1,67 +1,62 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import API from "../../API";
-import ReactDataGrid from "@inovua/reactdatagrid-community";
-import "@inovua/reactdatagrid-community/index.css";
+import Datatable from "../../Components/Datatable";
 
 const UserList = (props) => {
+  const navigate = useNavigate();
   document.title = props.title;
-  const [gridRef, setGridRef] = useState(null);
   const [state, setState] = useState([]);
+  const [Loading, setLoading] = useState(false);
   const loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>;
-  const columns = [
-    { name: "clientId", type: "number", maxWidth: 65, header: "#ID" },
-    { name: "name", defaultFlex: 2, header: "Nome" },
-    { name: "birthDate", defaultFlex: 2, header: "Data de Nascimento", render: ({ value }) => moment(value).format("DD/MM/YYYY") },
-    { name: "jobOccupation", defaultFlex: 3, header: "Profissão" },
-    { name: "CreatedAt", defaultFlex: 2, header: "Data de Registo", render: ({ value }) => moment(value).format("DD/MM/YYYY") },
-    {
-      name: "actions",
-      defaultFlex: 3,
-      header: "Ações",
-      render: (e) => {
-        return (
-          <div className="text-center">
-            <a href={"/users/detail/" + e.data.id} className="badge badge-success p-2">
-              Editar
-            </a>
-            &nbsp;
-            <a href="#" className="badge badge-danger p-2">
-              Eliminar
-            </a>
-            &nbsp;
-            <a href="#" className="badge badge-primary p-2">
-              Ver Detalhe
-            </a>
-          </div>
-        );
+  const columns = useMemo(
+    () => [
+      {
+        accessorKey: "clientId", //access nested data with dot notation
+        header: "ID#",
       },
-    },
-  ];
+      {
+        accessorKey: "name",
+        header: "Nome do Cliente",
+      },
+      {
+        accessorKey: "jobOccupation",
+        header: "Profissão",
+      },
+      {
+        accessorKey: "birthDate", //normal accessorKey
+        header: "Data de Nascimento",
+        Cell: ({ cell }) => moment(cell.getValue()).format("DD/MM/YYYY"),
+      },
+      {
+        accessorKey: "createdAt",
+        header: "Data de Registo",
+        Cell: ({ cell }) => moment(cell.getValue()).format("DD/MM/YYYY"),
+      },
+    ],
+    []
+  );
+
   const getClients = async () =>
     API.get("/clients").then((res) => {
       return res.data;
     });
 
+  const fnDelete = (id) => {
+    console.log(id);
+  };
+  const fnEdit = async (id) => {
+    navigate("/users/detail/" + id);
+  };
   useEffect(() => {
+    setLoading(true);
     getClients().then((res) => {
       setState(res);
+      setLoading(false);
     });
   }, []);
 
-  const onSearchChange = ({ target: { value } }) => {
-    const visibleColumns = gridRef.current.visibleColumns;
-
-    const lowerSearchText = value && value.toLowerCase();
-    const newData = state.filter((p) => {
-      return visibleColumns.reduce((acc, col) => {
-        const v = (p[col.id] + "").toLowerCase(); // get string value
-        return acc || v.indexOf(lowerSearchText) != -1; // make the search case insensitive
-      }, false);
-    });
-
-    setState(newData);
-  };
   return (
     <div>
       <Suspense fallback={loading()}>
@@ -99,14 +94,7 @@ const UserList = (props) => {
                     <div className="card-body">
                       <div className="row">
                         <div className="col-12">
-                          <input id="search-client" className="form-control" placeholder="Procurar cliente..." name="search-client" onChange={onSearchChange} />
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-12">
-                          <div className="table-responsive ">
-                            <ReactDataGrid handle={setGridRef} className="table table-sm" style={{ minHeight: 550, marginTop: 10 }} columns={columns} pagination dataSource={state} defaultLimit={10} idProperty="id" showCellBorders={"horizontal"} />
-                          </div>
+                          <Datatable isLoading={Loading} data={state} columns={columns} fnDelete={fnDelete} fnEdit={fnEdit} />
                         </div>
                       </div>
                     </div>

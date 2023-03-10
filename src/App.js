@@ -4,16 +4,24 @@ import Header from "./App/Header";
 import SideBar from "./App/SideBar";
 import Content from "./App/Content";
 import classes from "./App/custom/application.scss";
-import Swal from "sweetalert2";
 import "jquery/dist/jquery.min.js";
-
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#8e855b",
+    },
+  },
+});
 function App() {
   return (
-    <div className="wrapper">
-      <Header />
-      <SideBar />
-      <Content />
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="wrapper">
+        <Header />
+        <SideBar />
+        <Content />
+      </div>
+    </ThemeProvider>
   );
 }
 
