@@ -106,15 +106,16 @@ export default class UserRegistration extends Component {
                               <label>Data de Nascimento:</label>
                               <div className="input-group">
                                 <DatePicker
-                                  placeholderText="dd/mm/yyyy"
                                   id="birthdate"
-                                  value={moment(this.state.birthdate ?? new Date()).format("DD/MM/YYYY")}
+                                  locale={pt}
+                                  showYearDropdown={true}
+                                  showMonthDropdown={true}
+                                  isClearable={true}
                                   dateFormat="dd/MM/yyyy"
                                   className="form-control"
-                                  onChange={(date) => {
-                                    console.log(moment(date).format());
-                                    this.setState((prev) => ({ ...prev, birthdate: moment(date).format() }));
-                                  }}
+                                  placeholderText="dd/MM/yyyy"
+                                  selected={this.state?.birthdate == null ? null : new Date(this.state?.birthdate)}
+                                  onChange={(date) => this.setState((prev) => ({ ...prev, birthdate: date ? moment(date).format().toString() : null }))}
                                 />
                               </div>
                             </div>

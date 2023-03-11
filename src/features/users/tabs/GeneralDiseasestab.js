@@ -7,9 +7,9 @@ import Datatable from "../../../Components/Datatable";
 import GeneralDiseasesModal from "./modals/GeneralDiseasesModal";
 
 const GeneralDiseasestab = ({ setLoading, data_collection, toast, clientId, refresh }) => {
-  const [openModal, setOpenModal] = useState(false);
-  const [mode, setMode] = useState("add");
-  const [data, setData] = useState({});
+  let [openModal, setOpenModal] = useState(false);
+  let [mode, setMode] = useState("add");
+  let [dataG, setDataG] = useState({});
   const columns = useMemo(
     () => [
       {
@@ -36,15 +36,18 @@ const GeneralDiseasestab = ({ setLoading, data_collection, toast, clientId, refr
     []
   );
 
-  const fnEdit = async (id) => {
+  let fnEditGeneral = (id) => {
     setMode("edit");
-    setOpenModal(true);
+    API.get("/diseases/" + id)
+      .then((x) => setDataG(x.data))
+      .then(() => setOpenModal(true));
   };
-  const fnadd = () => {
+
+  let fnaddGeneral = () => {
     setMode("add");
     setOpenModal(true);
   };
-  const fnDelete = (id) => {
+  let fnDelete = (id) => {
     Swal.fire({
       title: "Atenção! Tem a certeza que desejar eliminar este registo?",
       showCancelButton: true,
@@ -55,10 +58,16 @@ const GeneralDiseasestab = ({ setLoading, data_collection, toast, clientId, refr
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
+        API.delete("/diseases/" + id)
+          .then(() => {
+            refresh();
+          })
+          .catch(() => toast.fire({ icon: "error", title: "Não foi possível eliminar o registo!" }));
+        toast.fire("Registo eliminado com sucesso!", "", "success");
       }
     });
   };
-  const exit = () => setOpenModal(false);
+  let exit = () => setOpenModal(false);
   return (
     <Suspense fallback={<div>loading...</div>}>
       <div className="row">
@@ -69,13 +78,13 @@ const GeneralDiseasestab = ({ setLoading, data_collection, toast, clientId, refr
       </div>
       <div className="row">
         <div className="col-sm-12">
-          <Button className="float-right" onClick={() => fnadd()} variant="contained">
+          <Button className="float-right" onClick={() => fnaddGeneral()} variant="contained">
             Adicionar
           </Button>
-          <Datatable density={"compact"} columns={columns} data={data_collection ?? []} fnEdit={fnEdit} fnDelete={fnDelete} />
+          <Datatable density={"compact"} columns={columns} data={data_collection ?? []} fnEdit={fnEditGeneral} fnDelete={fnDelete} />
         </div>
       </div>
-      {openModal ? <GeneralDiseasesModal refresh={refresh} setLoading={setLoading} mode={mode} open={setOpenModal} data={data} exit={exit} toast={toast} clientId={clientId} /> : ""}
+      {openModal ? <GeneralDiseasesModal refresh={refresh} setLoading={setLoading} mode={mode} open={openModal} data={dataG} exit={exit} toast={toast} clientId={clientId} /> : ""}
     </Suspense>
   );
 };

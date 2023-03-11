@@ -3,7 +3,6 @@ import API from "../../../../API";
 import moment from "moment";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
 import DatePicker from "react-datepicker";
-import Swal from "sweetalert2";
 import { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import pt from "date-fns/locale/pt";
@@ -148,13 +147,13 @@ const ClinicalInformationModal = ({ setLoading, open, mode, data, exit, toast, c
                         <label htmlFor="fg-laterization">Laterização:</label>
                         <div className="form-group " id="fg-laterization" style={{ padding: "0.375rem" }} onChange={handleIsLeftHanded}>
                           <div className="control-label icheck-primary d-inline">
-                            <input type="radio" id="radioPrimary2" name="r1" value="true" checked={clinicalInformation.isLeftHanded === true} />
+                            <input type="radio" id="radioPrimary2" name="r1" value="true" checked={clinicalInformation.isLeftHanded === true} onChange={(e) => onChangeClinicalInformation("mentalState", e.target.value)} />
                             <label className="radio-inline" htmlFor="radioPrimary2">
                               ESQ
                             </label>
                           </div>
                           <div className="control-label icheck-primary d-inline  ml-2">
-                            <input type="radio" id="radioPrimary1" name="r1" value="false" checked={clinicalInformation.isLeftHanded === false} />
+                            <input type="radio" id="radioPrimary1" name="r1" value="false" checked={clinicalInformation.isLeftHanded === false} onChange={(e) => onChangeClinicalInformation("mentalState", e.target.value)} />
                             <label className="radio-inline" htmlFor="radioPrimary1">
                               DIR
                             </label>
@@ -284,11 +283,15 @@ const ClinicalInformationModal = ({ setLoading, open, mode, data, exit, toast, c
                           <label>Grávida:</label>
                           <div className="input-group">
                             <DatePicker
+                              locale={pt}
+                              showYearDropdown={true}
+                              showMonthDropdown={true}
+                              isClearable={true}
                               dateFormat="dd/MM/yyyy"
                               className="form-control"
                               placeholderText="dd/mm/yyyy"
-                              value={moment(gynecologicalCond?.pregnantDate).format("DD/MM/YYYY")}
-                              onChange={(date) => onchangeGynecologicalCond("pregnantDate", moment(date).format())}
+                              selected={gynecologicalCond?.pregnantDate == null ? null : new Date(gynecologicalCond?.pregnantDate)}
+                              onChange={(date) => onchangeGynecologicalCond("pregnantDate", date ? moment(date).format().toString() : null)}
                             />
                           </div>
                         </div>
@@ -299,11 +302,15 @@ const ClinicalInformationModal = ({ setLoading, open, mode, data, exit, toast, c
                           <label>Amamentar:</label>
                           <div className="input-group">
                             <DatePicker
+                              locale={pt}
+                              showYearDropdown={true}
+                              showMonthDropdown={true}
+                              isClearable={true}
                               dateFormat="dd/MM/yyyy"
                               className="form-control"
                               placeholderText="dd/mm/yyyy"
-                              value={moment(gynecologicalCond?.breastFeedDate).format("DD/MM/YYYY")}
-                              onChange={(date) => onchangeGynecologicalCond("breastFeedDate", moment(date).format())}
+                              selected={gynecologicalCond?.breastFeedDate == null ? null : new Date(gynecologicalCond?.breastFeedDate)}
+                              onChange={(date) => onchangeGynecologicalCond("breastFeedDate", date ? moment(date).format().toString() : null)}
                             />
                           </div>
                         </div>
@@ -313,11 +320,15 @@ const ClinicalInformationModal = ({ setLoading, open, mode, data, exit, toast, c
                           <label>Menstruada:</label>
                           <div className="input-group">
                             <DatePicker
+                              locale={pt}
+                              showYearDropdown={true}
+                              showMonthDropdown={true}
+                              isClearable={true}
                               dateFormat="dd/MM/yyyy"
                               className="form-control"
                               placeholderText="dd/mm/yyyy"
-                              value={moment(gynecologicalCond?.menstruatingDate).format("DD/MM/YYYY")}
-                              onChange={(date) => onchangeGynecologicalCond("menstruatingDate", moment(date).format())}
+                              selected={gynecologicalCond?.menstruatingDate == null ? null : new Date(gynecologicalCond?.menstruatingDate)}
+                              onChange={(date) => onchangeGynecologicalCond("menstruatingDate", date ? moment(date).format().toString() : null)}
                             />
                           </div>
                         </div>
@@ -327,11 +338,15 @@ const ClinicalInformationModal = ({ setLoading, open, mode, data, exit, toast, c
                           <label>Menopausa:</label>
                           <div className="input-group">
                             <DatePicker
+                              locale={pt}
+                              showYearDropdown={true}
+                              showMonthDropdown={true}
+                              isClearable={true}
                               dateFormat="dd/MM/yyyy"
                               className="form-control"
                               placeholderText="dd/mm/yyyy"
-                              value={moment(gynecologicalCond?.menopauseDate).format("DD/MM/YYYY")}
-                              onChange={(date) => onchangeGynecologicalCond("menopauseDate", moment(date).format())}
+                              selected={gynecologicalCond?.menopauseDate == null ? null : new Date(gynecologicalCond?.menopauseDate)}
+                              onChange={(date) => onchangeGynecologicalCond("menopauseDate", date ? moment(date).format().toString() : null)}
                             />
                           </div>
                         </div>

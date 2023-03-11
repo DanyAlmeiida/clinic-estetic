@@ -10,13 +10,14 @@ var toast = Swal.mixin({
   toast: true,
   position: "top-end",
   showConfirmButton: false,
-  timer: 1000,
+  timer: 200,
 });
 const UserDetail = (props) => {
   const [Loading, setLoading] = useState(false);
   const params = useParams();
   let [ClientInfo, setClientInfo] = useState(null);
   let [ClientClinical, setClientClinical] = useState(null);
+  let [GeneralDiseases, setGeneralDiseases] = useState(null);
   useEffect(() => {
     document.title = props.title;
     load_client();
@@ -28,9 +29,9 @@ const UserDetail = (props) => {
       .then((res) => {
         setClientInfo(res.data);
         setClientClinical(res.data.clinicalInformation);
-        console.log(res.data);
+        setGeneralDiseases(res.data.generalDiseases);
       })
-      .catch((ex) => console.log(ex))
+      .catch((ex) => {})
       .finally(() => setLoading(false));
   };
   return (
@@ -93,7 +94,7 @@ const UserDetail = (props) => {
                         <div className="tab-pane fade show active show" id="pills-generic" role="tabpanel" aria-labelledby="pills-generic-tab">
                           <ClientInfotab setLoading={setLoading} isLoading={Loading} data={ClientInfo} toast={toast} refresh={load_client} />
                           <ClientClinicaltab setLoading={setLoading} data_collection={ClientClinical} toast={toast} clientId={params.id} refresh={load_client} />
-                          <GeneralDiseasestab />
+                          <GeneralDiseasestab setLoading={setLoading} data_collection={GeneralDiseases} toast={toast} clientId={params.id} refresh={load_client} />
                         </div>
                         <div className="tab-pane fade  " id="pills-clinical" role="tabpanel" aria-labelledby="pills-clinical-tab"></div>
                         <div className="tab-pane fade  " id="pills-sick" role="tabpanel" aria-labelledby="pills-sick-tab"></div>

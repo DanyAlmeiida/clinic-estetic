@@ -29,7 +29,7 @@ const ClientInfotab = ({ setLoading, data, toast, refresh }) => {
         id: data.id,
         clientId: data.clientId,
         name: data.name,
-        birthDate: moment(data?.birthDate).format("DD/MM/YYYY"),
+        birthDate: new Date(data?.birthDate),
         jobOccupation: data.jobOccupation,
         observations: data.observations,
         modifiedAt: data.modifiedAt,
@@ -69,7 +69,18 @@ const ClientInfotab = ({ setLoading, data, toast, refresh }) => {
           <div className="form-group">
             <label>Data de Nascimento:</label>
             <div className="input-group">
-              <DatePicker dateFormat="dd/MM/yyyy" className="form-control" value={moment(state?.birthDate).format("DD/MM/YYYY")} onChange={(date) => setState((prev) => ({ ...prev, birthDate: moment(date).format() }))} />
+              <DatePicker
+                locale={pt}
+                showYearDropdown={true}
+                showMonthDropdown={true}
+                required
+                isClearable={true}
+                dateFormat="dd/MM/yyyy"
+                className="form-control"
+                placeholderText="dd/MM/yyyy"
+                selected={state?.birthDate == null ? null : new Date(state?.birthDate)}
+                onChange={(date) => setState((prev) => ({ ...prev, birthDate: date ? moment(date).format().toString() : null }))}
+              />
             </div>
           </div>
         </div>
@@ -84,7 +95,7 @@ const ClientInfotab = ({ setLoading, data, toast, refresh }) => {
       </div>
       <div className="row">
         <div className="col-sm-12">
-          <Button Button className="float-right" onClick={() => save()} variant="contained">
+          <Button type="submit" className="float-right" onClick={() => save()} variant="contained">
             Guardar
           </Button>
         </div>

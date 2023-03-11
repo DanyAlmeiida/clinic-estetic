@@ -6,7 +6,7 @@ import { Button } from "@mui/material";
 import Datatable from "../../../Components/Datatable";
 import ClinicalInformationModal from "./modals/ClinicalInformationModal";
 
-const ClientClinicaltab = ({ setLoading, data_collection, isLoading, toast, clientId, refresh }) => {
+const ClientClinicaltab = ({ setLoading, data_collection, toast, clientId, refresh }) => {
   const [clinicalModalOpen, setClinicalModalOpen] = useState(false);
   const [mode, setMode] = useState("add");
   const [data, setData] = useState({});
@@ -36,7 +36,7 @@ const ClientClinicaltab = ({ setLoading, data_collection, isLoading, toast, clie
     []
   );
 
-  const fnEdit = async (id) => {
+  const fnEdit = (id) => {
     setMode("edit");
     API.get("/clinical/" + id).then((x) => {
       setData(x.data);
@@ -63,7 +63,7 @@ const ClientClinicaltab = ({ setLoading, data_collection, isLoading, toast, clie
           .then((x) => {
             refresh();
           })
-          .console.error(() => toast.fire({ icon: "error", title: "Não foi possível eliminar o registo clínico!" }));
+          .catch(() => toast.fire({ icon: "error", title: "Não foi possível eliminar o registo clínico!" }));
         toast.fire("Registo clínico eliminado com sucesso!", "", "success");
       }
     });
